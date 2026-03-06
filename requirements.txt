@@ -1,0 +1,2 @@
+# No external runtime dependency is required.
+# (Standard library only)
