@@ -11,7 +11,7 @@
     "age_max": 42,
     "price_male": 6000,
     "price_female": 3000,
-    "url": "https://example.com/tms/501"
+    "url": "https://www.fiore-party.com/party/"
   },
   {
     "id": "tms-502",
@@ -25,6 +25,6 @@
     "age_max": 49,
     "price_male": 5000,
     "price_female": 2000,
-    "url": "https://example.com/tms/502"
+    "url": "https://www.fiore-party.com/party/"
   }
 ]

@@ -1,2 +1,3 @@
 __pycache__/
 *.pyc
+konkatsu_poc/config/user_settings.local.json
