@@ -94,3 +94,10 @@ export TARGET_PASS='password'
   2) `_reindex` from remote
   を検討してください。
 - 本ツールは最小実装のため、運用では IAM/証明書/暗号化設定の厳密化を推奨します。
+
+
+## 参考: 婚活パーティー統合アプリ PoC
+
+このリポジトリには、複数サイト（IBJ/TMS想定）の候補をまとめて表示し、予定管理まで試せる最小Webプロトタイプも同梱しています。
+
+- `konkatsu_poc/README.md` を参照してください。
