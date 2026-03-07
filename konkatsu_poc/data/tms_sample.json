@@ -1,0 +1,30 @@
+[
+  {
+    "id": "tms-501",
+    "site": "TMS",
+    "title": "30代メイン・夜景ラウンジ交流会",
+    "date": "2026-03-21",
+    "start_time": "18:30",
+    "end_time": "20:30",
+    "location": "横浜",
+    "age_min": 30,
+    "age_max": 42,
+    "price_male": 6000,
+    "price_female": 3000,
+    "url": "https://example.com/tms/501"
+  },
+  {
+    "id": "tms-502",
+    "site": "TMS",
+    "title": "40代中心・落ち着いた出会い",
+    "date": "2026-03-23",
+    "start_time": "13:00",
+    "end_time": "15:00",
+    "location": "大宮",
+    "age_min": 40,
+    "age_max": 49,
+    "price_male": 5000,
+    "price_female": 2000,
+    "url": "https://example.com/tms/502"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ibj-101",
+    "site": "IBJ",
+    "title": "30代中心・銀座ディナーパーティー",
+    "date": "2026-03-20",
+    "start_time": "19:00",
+    "end_time": "21:00",
+    "location": "東京・銀座",
+    "age_min": 30,
+    "age_max": 39,
+    "price_male": 6500,
+    "price_female": 2500,
+    "url": "https://example.com/ibj/101"
+  },
+  {
+    "id": "ibj-102",
+    "site": "IBJ",
+    "title": "20代後半〜30代前半 カフェ婚",
+    "date": "2026-03-22",
+    "start_time": "14:00",
+    "end_time": "16:00",
+    "location": "東京・新宿",
+    "age_min": 27,
+    "age_max": 34,
+    "price_male": 5500,
+    "price_female": 2000,
+    "url": "https://example.com/ibj/102"
+  }
+]
