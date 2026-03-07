@@ -1,0 +1,7 @@
+{
+  "site_id": "tms_fiore",
+  "display_name": "TMS (FIORE PARTY)",
+  "official_url": "https://www.fiore-party.com/",
+  "search_url": "https://www.fiore-party.com/party/",
+  "data_path": "konkatsu_poc/data/tms_sample.json"
+}

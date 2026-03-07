@@ -100,4 +100,7 @@ export TARGET_PASS='password'
 
 このリポジトリには、複数サイト（IBJ/TMS想定）の候補をまとめて表示し、予定管理まで試せる最小Webプロトタイプも同梱しています。
 
-- `konkatsu_poc/README.md` を参照してください。
+- サイト定義の自動検出（`konkatsu_poc/sites/*.json`）
+- 個人設定の外部化（`konkatsu_poc/config/user_settings.local.json`、gitignore対象）
+- 詳細手順は `konkatsu_poc/README.md` を参照
+

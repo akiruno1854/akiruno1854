@@ -11,7 +11,7 @@
     "age_max": 39,
     "price_male": 6500,
     "price_female": 2500,
-    "url": "https://example.com/ibj/101"
+    "url": "https://www.partyparty.jp/pref/tokyo"
   },
   {
     "id": "ibj-102",
@@ -25,6 +25,6 @@
     "age_max": 34,
     "price_male": 5500,
     "price_female": 2000,
-    "url": "https://example.com/ibj/102"
+    "url": "https://www.partyparty.jp/pref/tokyo"
   }
 ]
