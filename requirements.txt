@@ -1,2 +1,2 @@
-# No external runtime dependency is required.
-# (Standard library only)
+# 既存ツール向け
+requests>=2.31.0
