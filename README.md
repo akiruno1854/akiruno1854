@@ -104,3 +104,17 @@ export TARGET_PASS='password'
 - 個人設定の外部化（`konkatsu_poc/config/user_settings.local.json`、gitignore対象）
 - 詳細手順は `konkatsu_poc/README.md` を参照
 
+
+---
+
+## 参考: MiroFish超ミニマム版（学習用CLI）
+
+学習目的で、複数エージェントの反応シミュレーションを最小構成で試せるサンプルを追加しました。
+
+```bash
+python -m mini_mirofish.main --text "政府が新しい補助金政策を発表した"
+```
+
+- デフォルトは `LLM_MODE=mock`（API不要）
+- API接続時は `.env.example` の環境変数を設定
+- 出力: `simulation_log.json` / `report.md`
