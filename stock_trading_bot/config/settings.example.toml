@@ -1,0 +1,22 @@
+[app]
+mode = "paper" # paper|live
+timezone = "Asia/Tokyo"
+
+[broker]
+provider = "example"
+api_base_url = "https://api.example-broker.local"
+api_key = ""
+api_secret = ""
+
+[risk]
+max_daily_loss_pct = 2.0
+max_position_per_symbol_pct = 10.0
+max_consecutive_losses = 3
+
+[screening]
+universe = ["7203", "6758", "9984"]
+min_avg_turnover_jpy = 500000000
+max_candidates = 10
+
+[report]
+output_dir = "./artifacts"

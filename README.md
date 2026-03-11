@@ -118,3 +118,10 @@ python -m mini_mirofish.main --text "政府が新しい補助金政策を発表�
 - デフォルトは `LLM_MODE=mock`（API不要）
 - API接続時は `.env.example` の環境変数を設定
 - 出力: `simulation_log.json` / `report.md`
+
+
+## 分離ワークスペース: 株取引自動化
+
+既存コードベースと目的が異なる検証用に、独立ディレクトリ `stock_trading_bot/` を追加しています。
+この配下は独立した `pyproject.toml` を持つため、既存の依存関係やスクリプトへ影響を与えません。
+
