@@ -1,0 +1,50 @@
+[
+  {
+    "place_id": "p1",
+    "name": "South Gate Coffee",
+    "lat": 35.6888,
+    "lng": 139.7004,
+    "category": "cafe",
+    "open_status": true,
+    "reservation_status": "bookable",
+    "crowd_estimation": "low",
+    "atmosphere_tags": ["conversation", "quiet"],
+    "distance_from_meetup_m": 230
+  },
+  {
+    "place_id": "p2",
+    "name": "Trattoria Verde",
+    "lat": 35.6901,
+    "lng": 139.6999,
+    "category": "restaurant",
+    "open_status": true,
+    "reservation_status": "call",
+    "crowd_estimation": "medium",
+    "atmosphere_tags": ["conversation", "date"],
+    "distance_from_meetup_m": 410
+  },
+  {
+    "place_id": "p3",
+    "name": "Evening Lounge Bar",
+    "lat": 35.691,
+    "lng": 139.7022,
+    "category": "bar",
+    "open_status": true,
+    "reservation_status": "unknown",
+    "crowd_estimation": "high",
+    "atmosphere_tags": ["date"],
+    "distance_from_meetup_m": 620
+  },
+  {
+    "place_id": "p4",
+    "name": "Station Side Cafe",
+    "lat": 35.6878,
+    "lng": 139.701,
+    "category": "cafe",
+    "open_status": false,
+    "reservation_status": "bookable",
+    "crowd_estimation": "low",
+    "atmosphere_tags": ["work", "quiet"],
+    "distance_from_meetup_m": 300
+  }
+]
