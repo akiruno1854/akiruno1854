@@ -26,3 +26,8 @@ uvicorn app.backend.main:app --reload
 ## 現在のAPI
 - `GET /api/health`
 - `POST /api/search`
+
+## Google API結合前チェック
+- 仕様合わせは `docs/google-api-compatibility-checklist.md` を参照
+- Nearby Search(New) の `places[]` 前提で正規化する
+- `X-Goog-FieldMask` 必須

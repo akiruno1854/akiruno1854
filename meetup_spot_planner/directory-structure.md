@@ -19,6 +19,7 @@ meetup_spot_planner/
 │   ├── minimum-test-cases.md
 │   ├── external-api-flow-and-io.md
 │   ├── test-cases-input-output.md
+│   ├── google-api-compatibility-checklist.md
 │   └── tech-stack.md
 ├── app/
 │   ├── backend/              # Webサーバー/API

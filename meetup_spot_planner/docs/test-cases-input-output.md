@@ -40,17 +40,17 @@
 
 ## 2. 外部API取込テスト
 
-### TC-UP-001 正常系: 上流JSON→内部スキーマ正規化
+### TC-UP-001 正常系: Google Places(New) JSON→内部スキーマ正規化
 - Upstream Input
-  - Place Search APIのサンプルJSON
+  - `places[]` を含む Nearby Search(New) 応答JSON
 - Expected Output
   - `place_id/name/lat/lng/category/open_status` が正規化される
 
-### TC-UP-002 欠損系: opening_hoursが無い
+### TC-UP-002 欠損系: currentOpeningHoursが無い
 - Upstream Input
 ```json
 {
-  "results": [{"id": "x1", "name": "NoHour Cafe", "geometry": {"location": {"lat": 1, "lng": 2}}}]
+  "places": [{"id": "x1", "displayName": {"text": "NoHour Cafe"}, "location": {"latitude": 1, "longitude": 2}}]
 }
 ```
 - Expected Output

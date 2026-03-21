@@ -1,84 +1,91 @@
-# 外部API連携フロー（OpenSearch/Map API想定）
+# 外部API連携フロー（Google Maps Places API準拠）
 
 ## 1. 目的
-外部APIから返るJSONの揺れを吸収し、アプリ内部で一貫した処理を行うためのフローを定義する。
+Google Maps APIの実仕様に合わせて、結合時に壊れない前提を固定する。
 
-## 2. 処理フロー（フローチャート）
+## 2. 事前確認した仕様ポイント（公式ドキュメント）
+- Nearby Search (New) は **HTTP POST** + JSON Body
+- エンドポイントは `https://places.googleapis.com/v1/places:searchNearby`
+- `X-Goog-FieldMask` は **必須**（未指定はエラー）
+- 応答は `results` ではなく **`places` 配列**
+- 地点検索（住所→座標）は Geocoding API を併用
+
+## 3. 処理フロー（フローチャート）
 
 ```mermaid
 flowchart TD
     A[ユーザー入力: meetup_point, tags, headcount] --> B[Search API: 入力バリデーション]
     B -->|OK| C[Geocoding APIで待ち合わせ地点を座標化]
-    B -->|NG| Z1[400 Bad Request]
+    B -->|NG| Z1[422 Validation Error]
 
-    C --> D[Place Search API呼び出し]
-    D --> E[Reservation/Review API呼び出し(任意)]
-
-    D --> F[生データJSON受信]
-    E --> F
-
-    F --> G[Normalizer: 共通スキーマへ変換]
-    G --> H[Filter: 距離/カテゴリ/営業時間]
-    H --> I[Scoring: 入りやすさ算出]
-    I --> J[ランキング整形 + 理由生成]
-    J --> K[レスポンスJSON返却]
+    C --> D[Places Nearby Search(New) POST]
+    D --> E[places[] JSON受信]
+    E --> F[Normalizer: 内部スキーマへ変換]
+    F --> G[Filter: 距離/カテゴリ/営業時間]
+    G --> H[Scoring: 入りやすさ算出]
+    H --> I[ランキング整形 + 理由生成]
+    I --> J[レスポンスJSON返却]
 
     C -->|失敗| Z2[502 Upstream Error]
     D -->|失敗| L[Fixtureフォールバック]
-    E -->|失敗| L
-    L --> G
+    L --> F
 ```
 
-## 3. 外部APIレスポンス例（想定）
+## 4. Google Places Nearby Search(New) リクエスト例
+```http
+POST https://places.googleapis.com/v1/places:searchNearby
+X-Goog-Api-Key: API_KEY
+X-Goog-FieldMask: places.id,places.displayName,places.location,places.types,places.currentOpeningHours
+Content-Type: application/json
+```
 
-### 3.1 Place Search API（上流）
 ```json
 {
-  "results": [
+  "includedTypes": ["cafe", "restaurant"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {"latitude": 35.6895, "longitude": 139.6917},
+      "radius": 800.0
+    }
+  }
+}
+```
+
+## 5. Google Places Nearby Search(New) 応答例
+```json
+{
+  "places": [
     {
-      "id": "abc123",
-      "name": "Cafe Example",
-      "geometry": {"location": {"lat": 35.68, "lng": 139.70}},
-      "types": ["cafe", "restaurant"],
-      "opening_hours": {"open_now": true},
-      "rating": 4.1,
-      "user_ratings_total": 212
+      "id": "ChIJ...",
+      "displayName": {"text": "Cafe Example", "languageCode": "ja"},
+      "location": {"latitude": 35.68, "longitude": 139.70},
+      "types": ["cafe", "food", "point_of_interest"],
+      "currentOpeningHours": {"openNow": true}
     }
   ]
 }
 ```
 
-### 3.2 Reservation API（上流）
+## 6. 正規化後の内部共通スキーマ（下流）
 ```json
 {
-  "shop_id": "abc123",
-  "reservation": {
-    "status": "bookable",
-    "next_available": "2026-03-21T10:30:00+09:00"
-  }
-}
-```
-
-## 4. 正規化後の内部共通スキーマ（下流）
-```json
-{
-  "place_id": "abc123",
+  "place_id": "ChIJ...",
   "name": "Cafe Example",
   "lat": 35.68,
   "lng": 139.70,
   "category": "cafe",
   "open_status": true,
-  "reservation_status": "bookable",
+  "reservation_status": "unknown",
   "crowd_estimation": "medium",
-  "atmosphere_tags": ["conversation"],
+  "atmosphere_tags": [],
   "distance_from_meetup_m": 380
 }
 ```
 
-## 5. OpenSearch/Map API連携で先にやるべき順序
-1. バリデーション + エラーレスポンス統一
-2. GeocodingとPlace Searchの最小連携
-3. Normalizer実装（欠損・型ブレ吸収）
-4. Filter/Scoring実装
-5. Reservation/Review API統合
-6. 失敗時フォールバックと観測ログ追加
+## 7. 実装順序（結合失敗を防ぐ順）
+1. Nearby Search(New) のリクエスト/ヘッダを固定化（FieldMask含む）
+2. `places[]` → 内部スキーマのNormalizer実装
+3. 欠損ケース（`displayName`, `currentOpeningHours`なし）をテスト
+4. フィルタ/スコアリングに接続
+5. 上流エラー時フォールバックと監視ログ追加
